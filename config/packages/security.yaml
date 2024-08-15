@@ -1,0 +1,22 @@
+security:
+    password_hashers:
+        App\Entity\User:
+            algorithm: bcrypt
+
+    providers:
+        in_memory:
+            memory:
+                users:
+                    user:
+                        password: '$2y$13$GXuSZbSs7a0r9BLp0Q4rc.SGjesiNww3E9Zcc3XfGtiX1iM58/c9u'
+                        roles: 'ROLE_USER'
+
+    firewalls:
+        api:
+            pattern: ^/api/
+            stateless: true
+            jwt: ~
+
+    access_control:
+        - { path: ^/api/token, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api, roles: ROLE_USER }
